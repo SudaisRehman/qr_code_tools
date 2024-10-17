@@ -2,14 +2,13 @@ group 'com.aifeii.qrcode.tools'
 version '0.1.0'
 
 buildscript {
-    ext.kotlin_version = '1.5.20'
+    ext.kotlin_version = '1.8.22' // Updated Kotlin version
     repositories {
         google()
-        jcenter()
+        mavenCentral() // Replacing deprecated jcenter()
     }
-
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.2'
+        classpath 'com.android.tools.build:gradle:8.1.0' // Updated Gradle version
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -17,7 +16,7 @@ buildscript {
 rootProject.allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 }
 
@@ -25,27 +24,30 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 30
-  namespace 'com.aifeii.qrcode.tools'
+    compileSdkVersion 33 // Use the latest version for compatibility
+    namespace 'com.aifeii.qrcode.tools'
+
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
-      compileOptions {
+
+    compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17
+        jvmTarget = '17' // Ensure JVM 17 target
     }
+
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 21 // Updated for better compatibility
     }
 }
 
 dependencies {
-    implementation "com.google.zxing:core:3.3.0"
-    implementation "com.google.zxing:javase:3.3.0"
+    implementation "com.google.zxing:core:3.4.1" // Updated ZXing library
+    implementation "com.google.zxing:javase:3.4.1"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 }
